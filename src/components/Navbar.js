@@ -15,7 +15,7 @@ export default function NavbarComp({ listNavbar, children, isDark }) {
             {listNavbar?.map((v, i) => {
               return (
                 <Nav.Link key={i} href={v.link}>
-                  {i % 2 === 0 ? v.title : '^' + v.title}
+                  {v.title}
                 </Nav.Link>
               );
             })}
