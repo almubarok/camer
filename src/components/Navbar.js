@@ -1,8 +1,12 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
-export default function NavbarComp({ listNavbar, children }) {
+export default function NavbarComp({ listNavbar, children, isDark }) {
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar
+      bg={isDark ? 'dark' : 'light'}
+      variant={isDark ? 'dark' : 'light'}
+      expand='lg'
+    >
       <Container>
         <Navbar.Brand href='#home'>Coba React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
