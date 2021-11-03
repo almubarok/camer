@@ -1,10 +1,10 @@
 import logo from './logo.svg';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
-
+// import Assignment from './Assignment';
 const navbar = [
   { link: '#home', title: 'Home' },
   { link: '#link', title: 'Link' },
@@ -15,15 +15,14 @@ function App() {
   // dispatch function untuk ngubah state
   const [counter, setCounter] = useState(0);
   const [sNavbar, setSNavbar] = useState(navbar);
+  const [isDark, setIsDark] = useState(false);
 
   const handleIncrement = () => {
-    // setCounter(counter + 1);
     setCounter((prev) => prev + 1);
   };
 
   const handleDecrement = () => {
     // setCounter(counter - 1);
-    setCounter((prev) => prev - 1);
   };
 
   const handleAddHeader = () => {
@@ -36,38 +35,29 @@ function App() {
     ]);
   };
 
-  // jsx - js + xml
-
-  // re render
-  // lifecycle:
-  // - mount/ render
-  // - update
-  // - unmount / pindah page
-
-  // hook: useEffect
-
-  // server side rendering
-  // client side rendering
-  // ssg static site generation
-  // isr incremental static revalidate
-  // next js -> level up react
-
-  // SPA: single page application
+  const handleSwitchDarkMode = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const styleP = {
     color: counter % 2 === 0 ? 'white' : 'green',
     border: '2px solid white',
   };
 
-  // lifec
   return (
     <div className='App'>
-      <Navbar listNavbar={sNavbar}>
-        <h4>Strong</h4>
+      <Navbar listNavbar={sNavbar} isDark={isDark}>
+        <Form.Check
+          type='switch'
+          id='dark-switch'
+          label='Dark'
+          value={isDark}
+          onChange={handleSwitchDarkMode}
+        />
       </Navbar>
-      <header className='App-header'>
+      <header className={isDark ? 'App-header-dark' : 'App-header-light'}>
         <img src='assets/image/logo192.png' className='App-logo' alt='logo' />
-        <p style={styleP}>
+        <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
