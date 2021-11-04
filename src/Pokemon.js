@@ -30,30 +30,39 @@ import { useState, useEffect } from 'react';
 // }
 
 export default function Pokemon() {
-  const [pokemon, setPokemon] = useState({});
-  const [idPokemon, setIdPokemon] = useState(1);
+  const [angka1, setAngka1] = useState(1);
+  const [angka2, setAngka2] = useState(1);
+  const [pokemon, setPokemon] = useState(1);
 
   useEffect(() => {
+    // alert("useeffect tertrigger")
     const getPokemon = async () => {
       const response = await fetch(
-        'https://pokeapi.co/api/v2/berry/' + idPokemon
+        'https://pokeapi.co/api/v2/berry/' + angka1
       );
       const res = await response.json();
       setPokemon(res);
     };
     getPokemon();
-  }, [idPokemon]);
+    // alert("Component di mount")
+  },[angka1]);
 
-  const handleIdPokemon = (e) => {
-    setIdPokemon(e.target.value);
+  const handleAngka1 = (e) => {
+    setAngka1(e.target.value);
+  };
+
+  const handleAngka2 = (e) => {
+    setAngka2(e.target.value);
   };
 
   return (
     <>
-      <input type='number' value={idPokemon} onChange={handleIdPokemon} />{' '}
+    <div>Ini component</div>
+    <input type='number' value={angka1} onChange={handleAngka1} />
+    <input type='number' value={angka2} onChange={handleAngka2} />
       <br />
       Pokemon name: {pokemon?.name} <br />
-      firmness: {pokemon?.firmness?.name}
+      firmness: {pokemon?.firmness?.name} 
     </>
   );
 }
