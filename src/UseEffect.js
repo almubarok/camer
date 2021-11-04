@@ -2,24 +2,24 @@ import { useEffect,useState } from 'react'
 import React from 'react';
 
 // componentDidMount
-// export default class componentDidMountMethod extends React.Component {
-//   constructor(props){
-//     super(props)
-//     this.state = {
-//       name: 'Test Did Mount'
-//     }
-//   }
-//   componentDidMount() {
-//     alert("Ini akan muncul ketika component di mount")
-//   }
-//   render() {
-//     return (
-//       <div>
-//        <p>{this.state.name}</p>
-//       </div>
-//     )
-//   }
-// }
+export default class componentDidMountMethod extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name: 'Test Did Mount'
+    }
+  }
+  componentDidMount() {
+    alert("Ini akan muncul ketika component di mount")
+  }
+  render() {
+    return (
+      <div>
+       <p>{this.state.name}</p>
+      </div>
+    )
+  }
+}
 
 // componentDidUpdate
 // export default class componentDidUpdateMethod extends React.Component {
@@ -88,19 +88,45 @@ import React from 'react';
 // }
 
 
-export default function Example() {
-  const [count, setCount] = useState(0);
+// export default function Example() {
+//   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    alert("Use Effect terpanggil")
-  },[]);
+//   useEffect(() => {
+//     alert("Use Effect terpanggil")
+//   },[]);
 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <p>You clicked {count} times</p>
+//       <button onClick={() => setCount(count + 1)}>
+//         Click me
+//       </button>
+//     </div>
+//   );
+// }
+
+
+// UseEffect Unmount
+// export default function Example() {
+//   const [show,setShow]=useState(true)
+  
+//   return (
+//       <>
+//         <p>{show ? <Child/> : null}</p>
+//           <button onClick={() => {setShow(!show)}}>Click me to toggle</button>
+//       </>
+//   )
+
+// }
+
+// function Child(){
+
+//   useEffect(() => {
+//     return function cleanup(){alert("Use Effect terpanggil")}
+//   });
+//   return(
+//       <>
+//       I am a child component
+//       </>
+//   )
+// }
