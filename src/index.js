@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
+import Form from './Form'
+// import Uncontrolled from './Uncontrolled'
+// import Validation from './Validation'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Form />
+    {/* <Uncontrolled/> */}
+    {/* <Validation/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
