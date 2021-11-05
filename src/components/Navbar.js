@@ -1,23 +1,25 @@
-export default function Navigation(){
-    return (
-        <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    )
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+
+export default function NavbarComp({ listNavbar, children, isDark }) {
+  return (
+    <>
+    <Navbar bg="light" variant="light">
+      <Container>
+      <Navbar.Brand>Navbar</Navbar.Brand>
+      <Nav className="me-auto">
+        <Nav.Link>Home</Nav.Link>
+        <Nav.Link>Contacts</Nav.Link>
+        <Nav.Link>Notfound</Nav.Link>
+        <NavDropdown title="Blog" id="navbarScrollingDropdown">
+          <NavDropdown.Item >Artikel 1</NavDropdown.Item>
+          <NavDropdown.Item >Artikel 2</NavDropdown.Item>
+        </NavDropdown>
+        <Nav.Link>Redirect</Nav.Link>
+        <Nav.Link>Hook</Nav.Link>
+        <Nav.Link>Login</Nav.Link>
+      </Nav>
+      </Container>
+    </Navbar>
+    </>
+  );
 }

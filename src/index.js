@@ -5,10 +5,12 @@ import './index.css';
 import Form from './Form'
 // import Uncontrolled from './Uncontrolled'
 // import Validation from './Validation'
+import Navbar from './components/Navbar'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Navbar/>
     <Form />
     {/* <Uncontrolled/> */}
     {/* <Validation/> */}
