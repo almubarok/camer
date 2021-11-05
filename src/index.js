@@ -2,18 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import Form from './Form'
-// import Uncontrolled from './Uncontrolled'
+// import Form from './Form'
+import Uncontrolled from './Uncontrolled'
 // import Validation from './Validation'
 import Navbar from './components/Navbar'
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navbar/>
-    <Form />
+    {/* <Navbar/> */}
+    {/* <Form /> */}
     {/* <Uncontrolled/> */}
-    {/* <Validation/> */}
+    <Validation/>
   </React.StrictMode>,
   document.getElementById('root')
 );
