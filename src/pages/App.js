@@ -1,8 +1,8 @@
 import {useState} from 'react'
 
-import Navbar from './components/Navbar';
-import Product from './components/Product';
-import ListCart from './components/ListCart';
+import Navbar from '../components/Navbar';
+import Product from '../components/Product';
+import ListCart from '../components/ListCart';
 
 
 import { Row,Container,Col,ListGroup } from 'react-bootstrap';
@@ -10,6 +10,7 @@ import { Row,Container,Col,ListGroup } from 'react-bootstrap';
 
 function App() {
   const [listCart, setlistCart] = useState([])
+  const [search, setSearch] = useState("")
 
   const listProduk =[
     {
@@ -53,36 +54,6 @@ function App() {
 
     // Check existing cart
     const checkID = listCart.find(element => element.id === parseInt(id));
-    // checkId jika id = 1
-    // {
-    //   id:1,
-    //   nama: "Baju",
-    //   harga:10000,
-    //   jumlah:1
-    // },
-
-    // listCart
-    // [
-    // {
-    //   id:1,
-    //   nama: "Baju",
-    //   harga:10000,
-    //   jumlah:28
-    // },
-    // {
-    //   id:2,
-    //   nama: "Jaket",
-    //   harga:10000,
-    //   jumlah:1
-    // },
-    // {
-    //   id:3,
-    //   nama: "Celan",
-    //   harga:10000,
-    //   jumlah:1
-    // },
-    // ]
-
 
     if(checkID===undefined){
       setlistCart([...listCart, {...hasil,jumlah:1}])
@@ -110,27 +81,76 @@ function App() {
   }
 
   const handleKurangi=(e)=>{
-    const {id} =e.target
+    const {id} = e.target
 
-    const newListCart = listCart.map((cart)=>{
-      if(parseInt(id)===cart.id){
-        cart.jumlah=cart.jumlah-1
-        return cart
-      }else{
-        return cart
-      }
-    })
-    setlistCart(newListCart)
+    // Find jumlah produk saat ini
+    const productInCart = listCart.find(element => element.id === parseInt(id));
+
+    if(productInCart.jumlah ===1){
+      const hasil = listCart.filter((product)=>{
+        if(product.id !== parseInt(id)){
+          return true
+        }else{
+          return false
+        }
+      })
+      setlistCart(hasil)
+    }else{
+      const newListCart = listCart.map((cart)=>{
+        if(parseInt(id)===cart.id){
+          cart.jumlah=cart.jumlah-1
+          return cart
+        }else{
+          return cart
+        }
+      })
+  
+      setlistCart(newListCart)
+    }
   }
+
+  const handleSearch =(e)=>{
+    const value = e.target.value
+    setSearch(value)
+  }
+
+  console.log("State list cart", listCart)
+
+  const totalHarga = listCart.reduce((prev,current)=>{
+    const total=current.jumlah*current.harga
+    return prev+total
+  },0)
+
+  const totalDiskon = listCart.reduce((prev,current)=>{
+    let total = 0
+      // Jika jumlah lebih dari 2 dia mendapatkan diskon 10%, rumusnya harga*jumlah*0.9
+      if(current.jumlah>2){
+        total = current.harga*current.jumlah*0.9
+      }else{
+        total=current.jumlah*current.harga
+      }
+      return prev+total
+  },0)
   
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar handler={handleSearch}/>
       <Container >
         <Row>
           <Col xs={8}>
             <Row>
-            {listProduk.map((produk)=>{
+            {search?
+            listProduk.filter((produk)=>{
+              if(produk.nama.toLowerCase().includes(search.toLowerCase())){
+                return true
+              }else{
+                return false
+              }
+            }).map((produk)=>{
+              return <Product id={produk.id} nama={produk.nama} harga={produk.harga} gambar={produk.gambar} handler={handleAddCart}/>
+            })
+            :
+            listProduk.map((produk)=>{
               return <Product id={produk.id} nama={produk.nama} harga={produk.harga} gambar={produk.gambar} handler={handleAddCart}/>
             })}
             </Row>
@@ -140,10 +160,28 @@ function App() {
             {listCart.map((produk)=>{
               return <ListCart id={produk.id} nama={produk.nama} harga={produk.harga} jumlah={produk.jumlah} handler={handleKurangi}/>
             })}
-            <ListGroup.Item>Total : {listCart.reduce((prev,current)=>{
-              const total=current.jumlah*current.harga
-              return prev+total
-            },0)} </ListGroup.Item>
+            <ListGroup.Item>
+              <Row>
+                <Col xs={6}>
+                Total : {totalHarga === totalDiskon ? <span>Rp. {totalHarga}</span>:<span style={{textDecoration:"line-through"}}>Rp. {totalHarga}</span>}
+                </Col>
+                <Col xs={6}>
+                  Jumlah Barang : {listCart.reduce((prev,current)=>{
+                    const jumlah = current.jumlah
+                    return prev + jumlah
+                  },0)}
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  {totalHarga !== totalDiskon ? <span>Diskon : Rp. {totalDiskon} </span>: null}
+                </Col>
+              </Row>
+              <br/><br/><br/>
+              <ListGroup.Item>
+                Untuk pembelian 3 pieces produk yang sama, akan mendapat diskon 10%.
+              </ListGroup.Item>
+            </ListGroup.Item>
           </ListGroup>
           </Col>
         </Row>
