@@ -1,11 +1,9 @@
-export function getLuas(sisi) {
-  return sisi * sisi;
-}
-
-export function getKeliling(sisi) {
-  return sisi * sisi;
-}
-
-export function getVolume(sisi2) {
-  return sisi2 * sisi2;
-}
+export const formatUppercase = (text) => {
+  const words = text.split("-");
+  let res = [];
+  for (const word of words) {
+    const tmp = word[0].toUpperCase();
+    res.push(tmp + word.slice(1));
+  }
+  return res.join(" ");
+};

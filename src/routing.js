@@ -1,38 +1,26 @@
-import {
-    useLocation,
-    Routes,
-    Route
-  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
-
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 
 // Pages
-import Home from './pages/index';
-import Login from './pages/login';
-import Contact from './pages/contacts';
-import ContactMe from './pages/contactme';
-import Blog from './pages/blog';
-import NotFound from './pages/notfound';
-import Redirect from './pages/redirect';
-import Hook from './pages/hook';
+import Home from "./pages/index";
+import Category from "./pages/category";
+import Detail from "./pages/detail";
+import NotFound from "./pages/notfound";
 
-export default function Routing(){
-    let path = useLocation();
-    return(
+export default function Routing() {
+  return (
     <>
-      {path.pathname=='/login'?null:<Navbar/>}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contacts" element={<Contact />} />
-        <Route path="/contactsme" element={<ContactMe />} />
-        <Route path="/blog/:id" element={<Blog />} />
-        <Route path="/redirect" element={<Redirect />} />
-        <Route path="/hook" element={<Hook />} />
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
+      <Navbar />
+      <Container className="mt-5">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/detail" element={<Detail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Container>
     </>
-    )
+  );
 }
