@@ -1,6 +1,11 @@
 import { Card } from "react-bootstrap";
 import Component3 from "./component3";
-export default function Component2() {
+import { useEffect } from "react";
+
+export default function Component2({}) {
+  useEffect(() => {
+    console.log("Component 2 rendered");
+  });
   return (
     <Card>
       <Card.Header>Component 2</Card.Header>
