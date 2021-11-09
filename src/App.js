@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Card, Button } from "react-bootstrap";
+import Component1 from "./components/component1";
+import { useState } from "react";
 
 function App() {
+  const [counter, setCounter] = useState(0);
+
+  const handleIncrement = () => {
+    setCounter(counter + 1);
+  };
+
+  const handleDecrement = () => {
+    setCounter(counter - 1);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Card>
+        <Card.Header>Root</Card.Header>
+        <Card.Body>
+          Value: {counter}
+          <Button size="sm" className="m-2" onClick={handleIncrement}>
+            Increment
+          </Button>
+          <Button size="sm" className="m-2" onClick={handleDecrement}>
+            Decrement
+          </Button>
+          <Component1 />
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }
 
