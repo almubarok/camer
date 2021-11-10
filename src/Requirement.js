@@ -25,6 +25,7 @@ function Requirement() {
         data-testid="inputAmount"
         style={{ textAlign: "center" }}
         value={amount}
+        type="number"
         onChange={(e) => setAmount(parseInt(e.target.value))}
       />
       <button
