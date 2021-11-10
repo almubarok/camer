@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav, NavDropdown, NavLink } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { pokemonTypes, pokemonsAbilities } from "../dummyData";
 import { formatUppercase } from "../helper/helper";
