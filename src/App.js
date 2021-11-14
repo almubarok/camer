@@ -2,10 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [umur,setUmur] =useState("")
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" role="image" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -14,9 +15,16 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="testing"
         >
           Learn React
         </a>
+        <input type="text" placeholder="Username" aria-label="testing"/>
+        <div>
+          Ini text buat test
+        </div>
+        <input type="text" placeholder="Umur" defaultValue="20" onChange={setUmur}/>
+        <textarea></textarea>
       </header>
     </div>
   );
