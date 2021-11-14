@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
 
 function App() {
-  const [umur,setUmur] =useState("")
+
+  const [umur,setUmur] =useState(0)
+
+  const [username, setUsername] = useState("")
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,12 +24,13 @@ function App() {
         >
           Learn React
         </a>
-        <input type="text" placeholder="Username" aria-label="testing"/>
+        <input type="text" placeholder="Username" aria-label="testing" defaultValue="" value={username} onChange={(e)=>setUsername(e.target.value)}/>
         <div>
           Ini text buat test
         </div>
-        <input type="text" placeholder="Umur" defaultValue="20" onChange={setUmur}/>
-        <textarea></textarea>
+        <input type="text" aria-label="umur" defaultValue={0} value={umur} />
+
+        <button onClick={()=>setUmur(umur+1)} aria-label="tambahUmur">Tambah Umur</button>
       </header>
     </div>
   );

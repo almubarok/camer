@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
 test('check rendered link', () => {
@@ -22,9 +22,33 @@ test('coba bytext', () => {
   expect(imageElelement).toBeInTheDocument();
 });
 
-test('coba byDisplayValue', () => {
+// test('coba byDisplayValue', () => {
+//   render(<App />);
+//   const imageElelement = screen.getByDisplayValue(20);
+//   expect(imageElelement).toBeInTheDocument();
+// });
+
+test('event click', () => {
   render(<App />);
-  const imageElelement = screen.getByDisplayValue(20);
-  expect(imageElelement).toBeInTheDocument();
+  const input0 = screen.getByDisplayValue(0);
+  expect(input0).toBeInTheDocument();
+
+  fireEvent.click(screen.getByLabelText("tambahUmur"))
+  const input1 = screen.getByDisplayValue(1);
+  expect(input1).toBeInTheDocument();
+
+  fireEvent.click(screen.getByLabelText("tambahUmur")) // onclick. onchange, onsubmit
+  const inputlast = screen.getByDisplayValue(2);
+  expect(inputlast).toBeInTheDocument();
+});
+
+test('event onchange', () => {
+  render(<App />);
+  const inputKosong = screen.getByDisplayValue("");
+  expect(inputKosong).toBeInTheDocument();
+
+  fireEvent.change(screen.getByPlaceholderText("Username"), {target: {value: 'Adi'}})
+  const inputUsername = screen.getByPlaceholderText("Username")
+  expect(inputUsername).toHaveValue("Adi")
 });
 
