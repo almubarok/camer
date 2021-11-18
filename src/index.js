@@ -1,12 +1,65 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { split, HttpLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+
+
+import App from './App';
+import Subscription from './Subscription'
+import Mutation from './Mutation'
+import Chat from './Chat'
+
+
+
+const httpLink = new HttpLink({
+  uri: 'https://mint-rooster-60.hasura.app/v1/graphql'
+});
+
+const wsLink = new WebSocketLink({
+  uri: 'wss://mint-rooster-60.hasura.app/v1/graphql',
+  options: {
+    reconnect: true
+  }
+});
+
+// The split function takes three parameters:
+//
+// * A function that's called for each operation to execute
+// * The Link to use for an operation if the function returns a "truthy" value
+// * The Link to use for an operation if the function returns a "falsy" value
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
+const client = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      {/* <App /> */}
+      {/* <Subscription/> */}
+      {/* <Mutation/> */}
+      <Chat/>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
