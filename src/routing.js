@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/index";
 import Category from "./pages/category";
 import Detail from "./pages/detail";
+import Login from "./pages/login";
 import NotFound from "./pages/notfound";
 
 export default function Routing() {
@@ -18,6 +19,7 @@ export default function Routing() {
           <Route path="/" element={<Home />} />
           <Route path="/category" element={<Category />} />
           <Route path="/detail" element={<Detail />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
