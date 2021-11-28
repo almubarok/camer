@@ -1,12 +1,18 @@
-import { parseCookies } from "nookies";
+import useGetUsers from "hooks/useGetUsers";
+import { Link } from "react-router-dom";
 
 export default function Index() {
-  const cookie = parseCookies();
-  const isLoggedIn = cookie["userId"];
+  const { users } = useGetUsers();
 
   return (
     <div>
-      {isLoggedIn ? <p>Ini kalau sudah login</p> : <p>Ini belum login</p>}
+      {users?.map((v) => {
+        return (
+          <p key={v.id}>
+            <Link to={`todolist/${v.id}`}>{v.name}</Link>
+          </p>
+        );
+      })}
     </div>
   );
 }
