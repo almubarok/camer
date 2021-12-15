@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import {useQuery, gql} from "@apollo/client";
+
+
+const TODOS = gql`
+  query querysoal1 {
+    kelas {
+      guru
+      id
+      nama
+    }
+  }
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+  const { loading, error, data } = useQuery(TODOS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return (<div>
+  <h2>UseQuery</h2>
+  {data.kelas.map((kelas) => (
+    <div key={kelas.id}>
+      <span>
+        {kelas.nama}
+      </span>
+      <span>
+        {kelas.guru}
+      </span>
     </div>
-  );
+  ))}
+  </div>)
 }
+
 
 export default App;
